@@ -498,35 +498,38 @@ handleButton = (str, type, block) ->
 
           return newStr
 
-# TODO: add button for if-else-elseif statements (for nested statements)
-      lastElseIndex = str.lastIndexOf("else")
+      else # if statements
+        indents = []
 
-      if (lastElseIndex == -1)
-        newStr = str + " else {\n\t\n}"
+        block.traverseOneLevel (child) ->
+          if child.type is 'indent'
+            indents.push child
+        indents = indents[-3...]
 
-        return newStr
-      else
-        lastElseIfIndex = str.lastIndexOf("else if")
+        if indents.length is 1
+          return str + ' else {\n  \n}\n'
 
-        if (lastElseIfIndex == -1)
-          trailingIfIndex = str.substring(lastElseIndex, str.length).lastIndexOf("if")
+        else if indents.length is 2
+          {string: prefix} = model.stringThrough(
+            block.start,
+            ((token) -> token is indents[0].end),
+            false
+          )
 
-          if (trailingIfIndex == -1)
-            newStr = str.substring(0, lastElseIndex) + "else if (a == b)" + str.substring(lastElseIndex + 4, str.length) + " else {\n\t\n}"
+          suffix = str[prefix.length + 1...]
 
-            return newStr
-          else
-            newStr = str + " else {\n\t\n}"
+          return prefix + '\n} else if (a == b) {\n    \n' + suffix
 
-            return newStr
-        else
+        else if indents.length is 3
+          {string: prefix} = model.stringThrough(
+            block.start,
+            ((token) -> token is indents[1].end),
+            false
+          )
 
-          if ((str.match(/else/g) || []).length > 1)
-            newStr = str.substring(0, lastElseIndex) + "else if (a == b)" + str.substring(lastElseIndex + 4, str.length) + " else {\n\t\n}"
-          else
-            newStr = str + " else {\n\t\n}"
+          suffix = str[prefix.length + 1...]
 
-          return newStr
+          return prefix + '\n} else if (a == b) {\n    \n' + suffix
 
   else if (type is 'subtract-button')
     if (blockType is 'field_declaration')
@@ -544,7 +547,7 @@ handleButton = (str, type, block) ->
       newStr = str.slice(0, str.lastIndexOf(","))
 
       return newStr
-# TODO: subtract button for if-else-elseif statements
+
     else if (blockType is 'simple_embedded_statement')
 
       if (str.substring(0, 2) != 'if') # method invocation
@@ -558,17 +561,30 @@ handleButton = (str, type, block) ->
 
         return newStr
 
-      elseCount = (str.match(/else/g) || []).length
+      else # if statements
+        indents = []
+        block.traverseOneLevel (child) ->
+          if child.type is 'indent'
+            indents.push child
+        indents = indents[-3...]
 
-      if (elseCount == 1)
-        newStr = str.substring(0, str.lastIndexOf("else"))
+        if indents.length is 1
+          return str
 
-        return newStr
-      else
-        lastIfIndex = str.lastIndexOf("if")
+        else
+          {string: prefix} = model.stringThrough(
+            block.start,
+            ((token) -> token is indents[0].end),
+            false
+          )
 
-        return str;
+          {string: suffix} = model.stringThrough(
+            block.end,
+            ((token) -> token is indents[1].end),
+            true
+          )
 
+          return prefix + suffix
   return str
 
 # allows us to color the same node in different ways given different
@@ -615,6 +631,58 @@ COLOR_CALLBACK = (opts, node) ->
 
   return null
 
+# Acceptance mapping is [drag][drop]
+ACCEPT_MAPPING =
+{
+
+}
+
+getType = (block) ->
+  if !block?
+    return null
+  if block.parseContext?
+    return block.parseContext
+  if block.nodeContext?
+    return block.nodeContext.type
+  if block.type == "indent" && block.parentParseContext? && block.parentParseContext != null
+    return block.parentParseContext
+  return block.type
+
+# defines behavior for what happens if we try to drop a block
+handleAcceptance = (block, context, pred, next) ->
+  dragType = getType(block)
+  dropType = getType(context)
+  nextType = getType(next)
+  predType = getType(pred)
+
+  if !dragType? || dragType == null
+    console.log "Could not extract block type: " + helper.noCycleStringify(block)
+    return null
+
+  # Special case for imports; they can only occur at the beginning of the document or after other imports.
+  # We must also prevent other items from going in front of imports.
+  if dragType == 'importDeclaration' && !(predType == 'importDeclaration' || predType == 'document')
+    return helper.FORBID
+ # TODO: ptobably gotta modify the types for these ^^^ and these vvv
+  if nextType == 'importDeclaration' && dragType != 'importDeclaration'
+    return helper.FORBID
+
+  # Deal with indents
+  if dropType == 'intent'
+    dropType = predType
+
+  if !dropType? || dropType == null
+    console.log "Could not extract context type: " + helper.noCycleStringify(context)
+    return null
+
+
+  if ACCEPT_MAPPING[dragType]? && ACCEPT_MAPPING[dragType][dropType]?
+  #      console.log ("Drag/Drop " + dragType + "/" + dropType + ": " + ACCEPT_MAPPING[dragType][dropType])
+    return ACCEPT_MAPPING[dragType][dropType]
+
+  console.log "Uncaught block/context [" + dragType + "/" + dropType + "] with pred/next [" + predType + "/" + nextType + "]:\n" + helper.noCycleStringify(block) + "\n" + helper.noCycleStringify(context) + "\n" + helper.noCycleStringify(pred) + "\n" +  helper.noCycleStringify(next)
+  return null
+
 config = {
   RULES,
   COLOR_DEFAULTS,
@@ -630,7 +698,8 @@ config = {
   PAREN_RULES,
   SHOULD_SOCKET,
   handleButton,
-  COLOR_CALLBACK
+  COLOR_CALLBACK,
+  handleAcceptance,
 }
 
 module.exports = parser.wrapParser antlrHelper.createANTLRParser 'CSharp', config
