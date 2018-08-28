@@ -120,17 +120,24 @@ RULES = {
   'member_access' : 'skip',
   'method_invocation' : 'skip',
   'argument_list' : 'skip',
+  'bracket_expression' : 'skip',
+  'indexer_argument' : 'skip',
+  'NEW' : 'skip',
+  'assignment' : 'skip',
 
   # Parens : defines nodes that can have parenthesis in them
   # (used to wrap parenthesis in a block with the
   # expression that is inside them, instead
   # of having the parenthesis be a block with a
   # socket that holds an expression)
-  'primary_expression_start' : 'parens',
+  'primary_expression_start' : (node) ->
+    if (node.children[0]?.type is 'NEW')
+      return 'skip'
+    else
+      return 'parens'
 
   # Sockets : can be used to enter inputs into a form or specify dropdowns
   'IDENTIFIER' : 'socket',
-  'NEW' : 'socket',
   'PUBLIC' : 'socket',
   'PROTECTED' : 'socket',
   'INTERNAL' : 'socket',
@@ -242,6 +249,8 @@ RULES = {
           return {type : 'block', buttons : ADD_BUTTON}
         else
           return {type : 'block', buttons : BOTH_BUTTON}
+      else #if (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[1]?.type is 'member_access')
+          return 'block'
     else if (node.children[0]?.type is 'RETURN')
       return 'block'
     else
@@ -251,10 +260,13 @@ RULES = {
         return {type : 'block', buttons : ADD_BUTTON_VERT}
 
   'primary_expression' : (node) ->
-    if (node.children[2]?.type is 'method_invocation')
+    if (node.children[2]?.type is 'method_invocation') or
+       (node.children[1]?.type is 'member_access') or
+       (node.children[1]?.type is 'bracket_expression')
       return 'skip'
     else
       return 'block'
+
 }
 
 # Used to color nodes
@@ -614,9 +626,12 @@ COLOR_CALLBACK = (opts, node) ->
   else if (node.type is 'simple_embedded_statement')
     if (node.children[0]?.type is 'IF')
       return 'conditional'
+    if (node.children[0]?.children[0]?.type is 'assignment')
+      return 'variable'
     else if (node.children[0]?.type is 'expression')
     # Forgive me, God
-      if (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[2]?.type is 'method_invocation')
+      if (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[2]?.type is 'method_invocation') or
+         (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[1]?.type is 'member_access')
         return 'functionCall'
       else
         return 'expression'
@@ -634,7 +649,7 @@ COLOR_CALLBACK = (opts, node) ->
 # Acceptance mapping is [drag][drop]
 ACCEPT_MAPPING =
 {
-
+# TODO: fill out for all constructs when (most of) everything can be turned into blocks
 }
 
 getType = (block) ->
