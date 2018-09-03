@@ -124,6 +124,8 @@ RULES = {
   'indexer_argument' : 'skip',
   'NEW' : 'skip',
   'assignment' : 'skip',
+  'generic_dimension_specifier' : 'skip',
+  'unbound_type_name' : 'skip',
 
   # Parens : defines nodes that can have parenthesis in them
   # (used to wrap parenthesis in a block with the
@@ -133,6 +135,8 @@ RULES = {
   'primary_expression_start' : (node) ->
     if (node.children[0]?.type is 'NEW')
       return 'skip'
+    else if (node.children[0]?.type is 'TYPEOF')
+      return 'block'
     else
       return 'parens'
 
@@ -249,9 +253,13 @@ RULES = {
           return {type : 'block', buttons : ADD_BUTTON}
         else
           return {type : 'block', buttons : BOTH_BUTTON}
-      else #if (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[1]?.type is 'member_access')
+      else
           return 'block'
     else if (node.children[0]?.type is 'RETURN')
+      return 'block'
+    else if (node.children[0]?.type is 'CHECKED')
+      return 'block'
+    else if (node.children[0]?.type is 'UNCHECKED')
       return 'block'
     else
       if (node.children[node.children?.length-2]?.type is 'ELSE')
@@ -262,11 +270,12 @@ RULES = {
   'primary_expression' : (node) ->
     if (node.children[2]?.type is 'method_invocation') or
        (node.children[1]?.type is 'member_access') or
-       (node.children[1]?.type is 'bracket_expression')
+       (node.children[1]?.type is 'bracket_expression') or
+       (node.children[1]?.type is 'OP_INC') or # ++ operator -> for some reason this is what droplet says a '++' is
+       (node.children[1]?.type is 'OP_DEC') # -- operator -> for some reason this is what droplet says a '--' is
       return 'skip'
     else
       return 'block'
-
 }
 
 # Used to color nodes
@@ -640,6 +649,10 @@ COLOR_CALLBACK = (opts, node) ->
       return 'loop'
     else if (node.children[0]?.type is 'RETURN')
       return 'variable'
+    else if (node.children[0]?.type is 'CHECKED')
+      return 'expression'
+    else if (node.children[0]?.type is 'UNCHECKED')
+      return 'expression'
     else
       return 'comment'
 
