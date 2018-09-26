@@ -126,6 +126,7 @@ RULES = {
   'assignment' : 'skip',
   'generic_dimension_specifier' : 'skip',
   'unbound_type_name' : 'skip',
+  'delegate_definition' : 'skip',
 
   # Parens : defines nodes that can have parenthesis in them
   # (used to wrap parenthesis in a block with the
@@ -324,6 +325,7 @@ COLOR_DEFAULTS = {
   'comment' : 'grey'
   'conditional' : 'lightgreen'
   'loop' : 'cyan'
+  'funcPointer' : 'amber'
 }
 
 # still not exactly sure what this section does, or what the helper does
@@ -617,6 +619,8 @@ COLOR_CALLBACK = (opts, node) ->
     else if (node.children[node.children?.length-1]?.children[0]?.children[1]?.type is 'method_declaration') or
             (node.children[node.children?.length-1]?.children[1]?.type is 'method_declaration')
       return 'method'
+    else if (node.children[1]?.children[0]?.type is 'delegate_definition')
+      return 'funcPointer'
     else return 'comment'
 
   else if (node.type is 'typed_member_declaration')
