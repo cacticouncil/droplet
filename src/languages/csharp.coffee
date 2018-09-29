@@ -119,7 +119,6 @@ RULES = {
   'embedded_statement' : 'skip',
   'member_access' : 'skip',
   'method_invocation' : 'skip',
-  'argument_list' : 'skip',
   'bracket_expression' : 'skip',
   'indexer_argument' : 'skip',
   'NEW' : 'skip',
@@ -127,6 +126,9 @@ RULES = {
   'generic_dimension_specifier' : 'skip',
   'unbound_type_name' : 'skip',
   'delegate_definition' : 'skip',
+  'object_creation_expression' : 'skip',
+  'argument' : 'skip',
+  'argument_list' : 'skip',
 
   # Parens : defines nodes that can have parenthesis in them
   # (used to wrap parenthesis in a block with the
@@ -248,8 +250,9 @@ RULES = {
             (node.children[0]?.type is 'WHILE')
       return 'block'
     else if (node.children[0]?.type is 'expression')
-      if (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[2]?.type is 'method_invocation')
-        params_list_node = node.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[2]
+      method_node = node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]
+      if (method_node.children[method_node.children.length-1]?.type is 'method_invocation')
+        params_list_node = method_node.children[method_node.children.length-1]
         if (params_list_node.children?.length == 2)
           return {type : 'block', buttons : ADD_BUTTON}
         else
@@ -269,7 +272,7 @@ RULES = {
         return {type : 'block', buttons : ADD_BUTTON_VERT}
 
   'primary_expression' : (node) ->
-    if (node.children[2]?.type is 'method_invocation') or
+    if (node.children[node.children.length-1]?.type is 'method_invocation') or
        (node.children[1]?.type is 'member_access') or
        (node.children[1]?.type is 'bracket_expression') or
        (node.children[1]?.type is 'OP_INC') or # ++ operator -> for some reason this is what droplet says a '++' is
@@ -499,7 +502,6 @@ handleButton = (str, type, block) ->
       return newStr
 
     else if (blockType is 'formal_parameter_list')
-
       newStr = str + ", int param1"
 
       return newStr
@@ -510,14 +512,13 @@ handleButton = (str, type, block) ->
       return newStr
 
     else if (blockType is 'simple_embedded_statement')
-
       if (str.substring(0, 2) != 'if') # method invocation
         if (str.substring(str.length-3, str.length-1) == "()")
           newStr = str.substring(0, str.length-2) + "_);"
 
           return newStr
         else
-          newStr = str.substring(0, str.length-2) + ",_);"
+          newStr = str.substring(0, str.length-2) + ", _);"
 
           return newStr
 
@@ -574,13 +575,13 @@ handleButton = (str, type, block) ->
     else if (blockType is 'simple_embedded_statement')
 
       if (str.substring(0, 2) != 'if') # method invocation
-
         lastCommaIndex = str.lastIndexOf(",")
 
         if (lastCommaIndex != -1)
           newStr = str.substring(0, lastCommaIndex) + ");"
         else
-          newStr = str.substring(0, str.length-3) + ");"
+          openParenIndex = str.lastIndexOf("(")
+          newStr = str.substring(0, openParenIndex + 1) + ");"
 
         return newStr
 
@@ -643,8 +644,9 @@ COLOR_CALLBACK = (opts, node) ->
       return 'variable'
     else if (node.children[0]?.type is 'expression')
     # Forgive me, God
-      if (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[2]?.type is 'method_invocation') or
-         (node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[1]?.type is 'member_access')
+      method_node = node.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]?.children[0]
+      if (method_node.children[method_node.children.length-1]?.type is 'method_invocation') or
+         (method_node.children[1]?.type is 'member_access')
         return 'functionCall'
       else
         return 'expression'
