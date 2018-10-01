@@ -35,6 +35,10 @@ csharp =
           'block': 'if (x == y) {\n\t\n}'
           'context': 'simple_embedded_statement'
         }
+        {
+          'id': 'comment',
+          'block': '//Comment\n',
+        },
       ]
     }
     {

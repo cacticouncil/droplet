@@ -11,6 +11,8 @@ model = require '../model.coffee'
 
 {fixQuotedString, looseCUnescape, quoteAndCEscape} = helper
 
+
+#▶
 ADD_BUTTON = [
   {
     key: 'add-button'
@@ -19,6 +21,7 @@ ADD_BUTTON = [
   }
 ]
 
+#◀
 SUBTRACT_BUTTON = [
   {
     key: 'subtract-button'
@@ -27,6 +30,7 @@ SUBTRACT_BUTTON = [
   }
 ]
 
+#◀▶
 BOTH_BUTTON = [
   {
     key: 'subtract-button'
@@ -40,6 +44,7 @@ BOTH_BUTTON = [
   }
 ]
 
+#▼
 ADD_BUTTON_VERT = [
   {
     key: 'add-button'
@@ -48,6 +53,7 @@ ADD_BUTTON_VERT = [
   }
 ]
 
+#▲▼
 BOTH_BUTTON_VERT = [
   {
     key: 'subtract-button'

@@ -4,8 +4,8 @@
   "devDependencies": {
     "browserify": "^10.2.4",
     "browserify-shim": "^3.8.8",
-    "coffeeify": "^1.1.0",
-    "grunt": "0.4.5",
+    "coffeeify": "^1.2.0",
+    "grunt": "^0.4.5",
     "grunt-banner": "latest",
     "grunt-bowercopy": "latest",
     "grunt-browserify": "^3.8.0",
@@ -56,6 +56,8 @@
   "dependencies": {
     "acorn": "^1.2.2",
     "antlr4": "latest",
+    "audit": "0.0.6",
+    "fix": "0.0.6",
     "json-stable-stringify": "^1.0.1",
     "node-dijkstra": "^1.1.3",
     "parse5": "latest",
