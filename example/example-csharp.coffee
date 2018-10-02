@@ -84,12 +84,12 @@ csharp =
           'context' : 'expression'
         }
         {
-          'block' : 'x++'
-          'context' : 'expression'
+          'block' : 'x++;'
+          'context' : 'simple_embedded_statement'
         }
         {
-          'block' : 'x--'
-          'context' : 'expression'
+          'block' : 'x--;'
+          'context' : 'simple_embedded_statement'
         }
       ]
     }
