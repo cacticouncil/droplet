@@ -64,6 +64,18 @@ csharp =
       'color': 'orange'
       'blocks': [
         {
+          'block' : 'x & y'
+          'context' : 'expression'
+        }
+        {
+          'block' : 'x ^ y'
+          'context' : 'expression'
+        }
+        {
+          'block' : 'x | y'
+          'context' : 'expression'
+        }
+        {
           'block' : 'x < y'
           'context' : 'expression'
         }
@@ -89,6 +101,10 @@ csharp =
         }
         {
           'block' : 'x || y'
+          'context' : 'expression'
+        }
+        {
+          'block' : '!x'
           'context' : 'expression'
         }
         {
