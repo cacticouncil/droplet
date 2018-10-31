@@ -84,12 +84,58 @@ csharp =
           'context' : 'expression'
         }
         {
-          'block' : 'x++;'
-          'context' : 'simple_embedded_statement'
+          'block' : 'x && y'
+          'context' : 'expression'
+        }
+        {
+          'block' : 'x || y'
+          'context' : 'expression'
+        }
+        {
+          'block': '(x > y ? x : y)'
+          'context': 'expression'
+        }
+      ]
+    }
+    {
+      'name':'Arithmetic'
+      'color':'teal'
+      'blocks':[
+        {
+          'block':'x + y'
+          'context':'expression'
+        }
+        {
+          'block':'x - y'
+          'context':'expression'
+        }
+        {
+          'block':'x * y'
+          'context':'expression'
+        }
+        {
+          'block':'x / y'
+          'context':'expression'
+        }
+        {
+          'block':'x % y'
+          'context':'expression'
+        }
+        {
+          'block':'x++;'
+          'context':'simple_embedded_statement'
         }
         {
           'block' : 'x--;'
           'context' : 'simple_embedded_statement'
+        }
+        {
+          'block' : '++x'
+          'context' : 'expression'
+        }
+        {
+          'block' : '--x'
+          'context' : 'expression'
         }
       ]
     }

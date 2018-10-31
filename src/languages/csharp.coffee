@@ -2,6 +2,7 @@
 #
 # Copyright (c) 2018 Kevin Jessup
 # MIT License
+# Updated 2018 Kevin Wong
 
 helper = require '../helper.coffee'
 parser = require '../parser.coffee'
@@ -68,7 +69,7 @@ BOTH_BUTTON_VERT = [
 ]
 
 RULES = {
-  # tell model to indent blocks within the main part of a n
+  # tell model to indent blocks within the main part of a 
   # namespace body (indent everything past namespace_member_declarations)
   'namespace_body': {
     'type': 'indent',
@@ -167,6 +168,7 @@ RULES = {
   'PARTIAL' : 'socket',
   'ASYNC' : 'socket',
 
+  #Value Types
   'SBYTE' : 'socket',
   'BYTE' : 'socket',
   'SHORT' : 'socket',
@@ -184,6 +186,7 @@ RULES = {
   'VOID' : 'socket',
   'VIRTUAL' : 'socket',
 
+  #Literal Keywords
   'INTEGER_LITERAL' : 'socket',
   'HEX_INTEGER_LITERAL' : 'socket',
   'REAL_LITERAL' : 'socket',
