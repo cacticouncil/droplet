@@ -27,15 +27,6 @@ csharp =
           'context': 'class_member_declaration'
         }
         {
-          'block': 'for(int i = 0; i < x; i++);'
-          'expansion': 'for(int i = 0; i < x; i++) {\n\t\n}'
-          'context': 'simple_embedded_statement'
-        }
-        {
-          'block': 'if (x == y) {\n\t\n}'
-          'context': 'simple_embedded_statement'
-        }
-        {
           'id': 'comment',
           'block': '//Comment\n',
         },
@@ -60,8 +51,59 @@ csharp =
       ]
     }
     {
-      'name': 'Logic'
+      'name': 'Selection'
       'color': 'orange'
+      'blocks': [
+        {
+          'block': 'if (x == y){\n\t\n}'
+          'context': 'simple_embedded_statement'
+        }
+        {
+          'id': 'if_else',
+          'block': 'if (x == y){\n\t\n}\nelse{\n    \n}',
+          'context': 'simple_embedded_statement'
+        }
+        {
+          'id': 'if_elseif_else',
+          'block': 'if (x == y){\n\t\n}\nelse if (x > y)\n{\n\t\n}\nelse\n{\n\t\n}',
+          'context': 'simple_embedded_statement'
+        }    
+      ]
+    }
+    {
+      'name': 'Loops'
+      'color': 'deeporange'
+      'blocks': [
+        {
+          'block': 'for(int i = 0; i < x; i++);'
+          'expansion': 'for(int i = 0; i < x; i++) {\n\t\n}'
+          'context': 'simple_embedded_statement'
+        }
+        {
+          'id': 'while',
+          'block': 'while(0 == 0){\n\t\n}',
+          'context': 'simple_embedded_statement'
+        }
+        {
+          'id': 'do_while',
+          'block': 'do{\n\t\n}\nwhile(0 == 0);',
+          'context': 'simple_embedded_statement'
+        }
+        {
+          'id': 'break',
+          'block': 'break;',
+          'context': 'simple_embedded_statement'
+        }
+        {
+          'id': 'continue',
+          'block': 'continue;',
+          'context': 'simple_embedded_statement'
+        } 
+      ]
+    }
+    {
+      'name': 'Logic'
+      'color': 'cyan'
       'blocks': [
         {
           'block' : 'x & y'
