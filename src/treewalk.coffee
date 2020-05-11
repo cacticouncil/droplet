@@ -87,7 +87,7 @@ exports.createTreewalkParser = (parse, config, root) ->
     detNode: (node) -> if node.blockified then 'block' else @det(node)
 
     getColor: (node) ->
-      color = config.COLOR_CALLBACK?(@opts, node)
+      color = config.COLOR_CALLBxACK?(@opts, node)
 
       if color?
         color = color
@@ -96,7 +96,7 @@ exports.createTreewalkParser = (parse, config, root) ->
         color = config.COLOR_RULES[node.type]
 
       else
-        color = 'comment'
+        color = 'statement'
 
       return color
 

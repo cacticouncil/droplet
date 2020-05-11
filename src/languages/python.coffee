@@ -171,22 +171,39 @@ config = {
   BUTTON_CALLBACK: insertButton
 
   COLOR_RULES: {
-    'term': 'value',
-    'funcdef': 'control',
-    'for_stmt': 'control',
-    'while_stmt': 'control',
-    'with_stmt': 'control',
-    'if_stmt': 'control',
-    'try_stmt': 'control',
-    'import_stmt': 'command',
-    'print_stmt': 'command',
-    'expr_stmt': 'command',
-    'pass_stmt': 'command',
-    'return_stmt': 'return',
-    'testlist': 'value',
-    'comparison': 'value',
-    'test': 'value',
-    'expr': 'value'
+    'import_name': 'import',
+    'import_from': 'import',
+    'term': 'term',
+    'funcdef': 'class-body',
+    'for_stmt': 'sets',
+    'while_stmt': 'sets',
+    'with_stmt': 'with_stmt',
+    'if_stmt': 'sets',
+    'try_stmt': 'statement',
+    'import_stmt': 'import',
+    'print_stmt': 'class-body',
+    'expr_stmt': 'statement',
+    'pass_stmt': 'pass_stmt',
+    'return_stmt': 'statement',
+    'testlist': 'testlist',
+    'comparison': 'logic',
+    'test': 'test',
+    'expr': 'bitwise',
+    'power': 'arithmatic',
+    'return': 'statement',
+    'class':'class'
+    'atom': 'arguments'
+    'classdef': 'class',
+    'arith_expr': 'arithmatic',
+    'term': 'arithmatic',
+    'and_expr':'bitwise',
+    'xor_expr': 'bitwise',
+    'shift_expr': 'bitwise',
+    'and_test': 'bitwise',
+    'or_test': 'bitwise',
+    'not_test': 'bitwise',
+    'comment':'statement'
+
   }
 
   SHAPE_RULES: [],
@@ -214,8 +231,6 @@ config.handleButton = (str, type, block) ->
   if blockType is 'if_stmt'
     node = parse({}, str).children[0]
     elif = checkElif(node)
-
-    console.log node
 
     if type is 'add-button'
       if elif is 'if' or elif is 'elif'

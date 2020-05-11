@@ -127,6 +127,7 @@ RULES = {
     'type': 'indent',
     'indexContext': 'classBodyDeclaration',
   },
+
   'block': {
     'type': 'indent',
     'indexContext': 'blockStatement',
@@ -144,8 +145,8 @@ RULES = {
 
   # Type wrappers
   'classDeclaration': 'skip',
-  'memberDeclaration': 'skip',
   'methodDeclaration': 'skip',
+  'memberDeclaration': 'skip',
   'fieldDeclaration': 'skip',
   'typeTypeOrVoid': 'skip',
   'typeName': 'skip',
@@ -268,25 +269,24 @@ COLOR_RULES = {
   'importDeclaration': 'import',
 
   # Object-types and methods
-  'typeDeclaration': 'type',
-  'classBodyDeclaration': 'class',
-  'methodDeclaration': 'class',
+  'typeDeclaration': 'class',
+  'classBodyDeclaration': 'class-body',
+  'methodDeclaration': 'class-body',
   'fieldDeclaration': 'class',
   'blockStatement': 'statement',
 #  'localVariableDeclarationStatement': 'statement',
 
-  'forControl': 'control_special',
-  'enhancedForControl': 'control_special',
+  'forControl': 'loop-logic',
+  'enhancedForControl': 'loop-logic',
 
   # Variables
   
   'variableDeclarator': 'statement',
-  'formalParameter': 'statement',
   'statementExpression': 'statement',
-  'expression': 'value',
-  'parExpression': 'value',
-  'primary': 'value',
-  'statement': 'statement',
+  'expression': 'arithmatic',
+  'parExpression': 'logic',
+  'primary': 'arithmatic',
+  'statement': 'sets',
 }
 
 handleButton = (str, type, block) ->
@@ -784,11 +784,11 @@ SHAPE_CALLBACK = { }
 
 # Default colors for various token types
 COLOR_DEFAULTS = {
-  'type': 'purple',
-  'import': 'grey',
-  'class': 'blue',
-  'value': 'teal',
-  'control_special': 'deeporange',
+#  'type': 'purple',
+#  'import': 'grey',
+#  'class': 'blue',
+#  'value': 'teal',
+#  'control_special': 'deeporange',
 
   'statement': (model) ->
     text = helper.trimIdentifierToken model.nodeContext?.prefix

@@ -700,8 +700,8 @@ exports.wrapParser = (CustomParser) ->
 
       return [leading, trailing, context]
 
-
-    drop: (block, context, pred, next) -> CustomParser.drop block, context, pred, next
+    drop: (block, context, pred, next) ->
+      CustomParser.drop block, context, pred, next
 
     handleButton: (text, command, oldblock) ->
       parser = @createParser(text)

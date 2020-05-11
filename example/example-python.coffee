@@ -27,132 +27,54 @@ dropletConfig.setValue '''
       }
     },
     "palette": [
+
       {
-        'name': 'Input/output',
+        'name': 'Operators',
+        'color': 'yellow',
+        'blocks': [
+
+          { 'block': 'True' },
+          { 'block': 'False' }
+        ]
+      },
+      {
+        'name': 'Controls',
+        'color': 'green',
+        'blocks': [
+          { 'block': "if a == b:\\n  print ('This is a conditional statement!')" },
+          { 'block': "while a == b:\\n  print ('This is a conditional loop!')" },
+          { 'block': 'for i in list_variable:\\n  print (i)' },
+          { 'block': 'break' },
+          { 'block': 'continue' },
+          { 'block': 'pass' }
+        ]
+      },
+       {
+        'name': 'Functions',
         'color': 'blue',
         'blocks': [
-          {
-            'block': "print 'hello'",
-          },
-          {
-            'block': "input('Enter a number')",
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': "raw_input('Enter a string')",
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'myFunction(drop, down)'
-          },
-          {
-            'block': 'colorTest(0, 1)'
-          },
-          {
-            'block': 'nestedFn(nestedFn(nestedFn))'
-          }
+          { 'block': 'def FunctionName(args):\\n  return' },
+          { 'block': 'FunctionName(args)' },
+          { 'block': 'lambda_variable = lambda args: args * 2' },
+          { 'block': 'return return_value' },
+          { 'block': 'return' }
         ]
       },
       {
-        'name': 'Control flow',
-        'color': 'control',
-        'blocks': [
-          {
-            'block': "for i in range(0, 10):\\n  print 'hello'",
-          },
-          {
-            'block': "if a == b:\\n  print 'hello'",
-          },
-          {
-            'block': "while a < b:\\n  print 'hello'",
-          }
-        ]
-      },
-      {
-        'name': 'Methods',
+        'name': 'Classes',
         'color': 'purple',
         'blocks': [
-          {
-            'block': 'import module'
-          },
-          {
-            'block': 'from module import something'
-          },
-          {
-            'block': "def myMethod(arg):\\n  print 'hello'",
-          },
-          {
-            'block': "return 'hello'",
-          },
-          {
-            'block': "myMethod(arg)",
-            'wrapperContext': expressionContext
-          },
+          { 'block': "class ClassName:\\n def __init__(self, args):\\n  self.args = args\\n  print('NOTE: The self parameter is the instance that the method is called on!')\\n def __del__(self):\\n  class_name = self.__class__.__name__\\n  print(class_name + ' was destroyed!')" },
+          { 'block': "class_object = ClassName('This is the default constructors args parameter!')" },
+          { 'block': 'class_object.__init__()' }
         ]
       },
       {
-        'name': 'Variables',
-        'color': 'red',
+        'name': 'Misc',
+        'color': 'black',
         'blocks': [
-          {
-            'block': 'a = 1'
-          }
-        ]
-      },
-      {
-        'name': 'Math',
-        'color': 'red',
-        'blocks': [
-          {
-            'block': 'a + b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a - b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a * b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a / b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a % b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a ** b',
-            'wrapperContext': expressionContext
-          }
-        ]
-      },
-      {
-        'name': 'Logic',
-        'color': 'teal',
-        'blocks': [
-          {
-            'block': 'a == b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a < b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a > b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a and b',
-            'wrapperContext': expressionContext
-          },
-          {
-            'block': 'a or b',
-            'wrapperContext': expressionContext
-          }
+          { 'block': '# this is a comment' },
+
         ]
       }
     ]

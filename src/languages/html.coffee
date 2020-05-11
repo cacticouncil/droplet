@@ -201,6 +201,7 @@ exports.HTMLParser = class HTMLParser extends parser.Parser
 
     @lines = @text.split '\n'
 
+
   getNodeContext: (node) -> new parser.PreNodeContext node.type, 0 ,0
 
   getParseContext: (node) -> node.type
@@ -610,7 +611,6 @@ HTMLParser.drop = (block, context, pred, next) ->
     if blockType in allowList and blockType not in forbidList
       return helper.ENCOURAGE
     return helper.FORBID
-
   switch contextType
     when 'html'
       if blockType is 'head'
@@ -796,6 +796,6 @@ HTMLParser.drop = (block, context, pred, next) ->
   if contextType in ['sub', 'sup', 'i', 'b', 'u']
     return check blockType, PHRASING_CONTENT
 
-  return helper.FORBID
+  return helper.ENCOURAGE
 
 module.exports = parser.wrapParser HTMLParser

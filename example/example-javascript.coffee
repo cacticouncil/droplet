@@ -70,7 +70,7 @@ dropletConfig.setValue '''
         'name': 'Control flow',
         'color': 'orange',
         'blocks': [
-          { 'block': 'for (var i = 0; i < 10; i++) {__}' },
+          { 'block': 'for (var i = 0; i < 10; i++) { \\n }' },
           { 'block': 'if (a === b) {__}' },
           { 'block': 'if (a === b) {__} else {_}' },
           { 'block': 'while (true) {__}' },

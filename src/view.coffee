@@ -60,12 +60,34 @@ DEFAULT_OPTIONS =
   bevelClip: 3
   shadowBlur: 5
   colors:
+
+  # colors from javascript, python and java coming under the same hood!
+    'import': '#e07529'   #chocolate-brown
+    'class-body': '#FF69B4' #deeper magenta
+    'class': '#DA70D6'      #magenta
+    'loop-logic': '#80deea' #cyan
+    'comment': '#8d8d8d'  # gray
+    'logic': '#80deea' #cyan
+    'arithmatic': '#81c0ff'
+    'statement': '#B0BF1A'
+    'sets': '#ffbf00'
+    'arguments': '#ff1a8d' #same as class body
+    'power': '#ff0000'
+    'bitwise':'#a5d6a7' #for bitwise operators
+
     error: '#ff0000'
-    comment: '#c0c0c0'  # gray
     return: '#fff59d'   # yellow
     control: '#ffcc80'  # orange
     value: '#a5d6a7'    # green
     command: '#90caf9'  # blue
+    function: '#90caf9'
+    declaration: '#e6ee9c'
+    value: '#a5d6a7'
+    #logic: '#ffab91'
+    assign: '#fff59d'
+    functionCall: '#90caf9'
+    control: '#ffab91'
+
     red: '#ef9a9a'
     pink: '#f48fb1'
     purple: '#ce93d8'
@@ -85,18 +107,6 @@ DEFAULT_OPTIONS =
     brown: '#bcaaa4'
     grey: '#eeeeee'
     bluegrey: '#b0bec5'
-    function: '#90caf9'
-    declaration: '#e6ee9c'
-    value: '#a5d6a7'
-    logic: '#ffab91'
-    assign: '#fff59d'
-    functionCall: '#90caf9'
-    control: '#ffab91'
-    'import': '#c0c0c0'
-    type: '#90caf9'
-    'class': '#ce93d8'
-    statement: '#ffe082'
-    control_special: '#80cbc4'
 
 
 YES = -> yes
@@ -264,7 +274,6 @@ exports.View = class View
 
   # Looks up a color name, or passes through a #hex color.
   getColor: (color) ->
-    console.log(color)
     if color and '#' is color.charAt(0)
       color
     else

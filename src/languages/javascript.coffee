@@ -44,17 +44,17 @@ KNOWN_FUNCTIONS =
   'Math.random' : {value: true}
 
 CATEGORIES = {
-  functions: {color: 'purple'}
-  returns: {color: 'yellow'}
-  comments: {color: 'gray'}
-  arithmetic: {color: 'green'}
-  logic: {color: 'cyan'}
+  functions: {color: 'class-body'}
+  returns: {color: 'statement'}
+  comments: {color: 'comment'}
+  arithmetic: {color: 'arithmatic'}
+  logic: {color: 'loop-logic'}
   containers: {color: 'teal'}
-  assignments: {color: 'blue'}
-  loops: {color: 'orange'}
-  conditionals: {color: 'orange'}
-  value: {color: 'green'}
-  command: {color: 'blue'}
+  assignments: {color: 'statement'}
+  loops: {color: 'sets'}
+  conditionals: {color: 'sets'}
+  value: {color: 'sets'}
+  command: {color: 'sets'}
   errors: {color: '#f00'}
 }
 
