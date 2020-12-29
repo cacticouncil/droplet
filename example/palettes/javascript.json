@@ -1,0 +1,70 @@
+{
+    "mode": "javascript",
+    "palette": [
+      {
+        "name": "Output",
+        "color": "blue",
+        "blocks": [ { "block": "console.log(\"hello\");" } ]
+      },
+      {
+        "name": "Variables",
+        "color": "blue",
+        "blocks": [
+          { "block": "var a = 10;" },
+          { "block": "a = 10;" },
+          { "block": "a += 1;" },
+          { "block": "a -= 10;" },
+          { "block": "a *= 1;" },
+          { "block": "a /= 1;" }
+        ]
+      },
+      {
+        "name": "Functions",
+        "color": "purple",
+        "blocks": [
+          { "block": "function myFunction(param) {__}" },
+          { "block": "myFunction(arg);" }
+        ]
+      },
+      {
+        "name": "Logic",
+        "color": "teal",
+        "blocks": [
+          { "block": "a === b" },
+          { "block": "a !== b" },
+          { "block": "a > b" },
+          { "block": "a < b" },
+          { "block": "a || b" },
+          { "block": "a && b" },
+          { "block": "!a" }
+        ]
+      },
+      {
+        "name": "Operators",
+        "color": "green",
+        "blocks": [
+          { "block": "a + b" },
+          { "block": "a - b" },
+          { "block": "a * b" },
+          { "block": "a / b" },
+          { "block": "a % b" },
+          { "block": "Math.pow(a, b)" },
+          { "block": "Math.sin(a)" },
+          { "block": "Math.tan(a)" },
+          { "block": "Math.cos(a)" },
+          { "block": "Math.random()" }
+        ]
+      },
+      {
+        "name": "Control flow",
+        "color": "orange",
+        "blocks": [
+          { "block": "for (var i = 0; i < 10; i++) { \n }" },
+          { "block": "if (a === b) {__}" },
+          { "block": "if (a === b) {__} else {_}" },
+          { "block": "while (true) {__}" },
+          { "block": "function myFunction(param) {_}" }
+        ]
+      }
+    ]
+  }
