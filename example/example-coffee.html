@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Droplet (CoffeeScript)</title>
+  </head>
+
+  <body>
+    <header class="site-header"></header>
+    <div class="page-content">
+      <div class="wrapper">
+        <link rel="stylesheet" href="../css/droplet.css">
+
+        <div class="col-xs-6">
+          <button class="btn btn-primary" id="toggle">Toggle Blocks</button>
+        </div>
+
+        <div class="container">
+          <div id="editor-wrapper" style="position:relative;width:100%;height:500px;border: 1px solid black;">
+            <div id="editor"></div>
+          </div>
+        </div>
+        <script src="../vendor/ace/ace.js"></script>
+        <script src="../dist/droplet-full.js"></script>
+        <script src="example-loader.js"></script>
+        <script>
+          sessions = {};
+          editor = getEditorFromPalette("palettes/coffee.json");
+        </script>
+      </div>
+    </div>
+  </body>
+</html>
+
