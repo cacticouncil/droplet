@@ -60,12 +60,33 @@ DEFAULT_OPTIONS =
   bevelClip: 3
   shadowBlur: 5
   colors:
+
+  # colors from javascript, python and java coming under the same hood!
+    'import': '#a0a0a0'     # gray
+    'class_body': '#90caf9' # blue
+    'class': '#ce93d8'      # purple
+    'loop_logic': '#80cbc4' # teal
+    'comment': '#c0c0c0'    # light gray
+    'logic': '#80deea'      # cyan
+    'arithmetic': '#81c0ff'
+    'statement': '#ffe082'
+    'sets': '#ffbf00'
+    'arguments': '#90caf9'  # same as class body
+    'power': '#ff0000'
+    'bitwise':'#a5d6a7'     # for bitwise operators
+
     error: '#ff0000'
-    comment: '#c0c0c0'  # gray
     return: '#fff59d'   # yellow
     control: '#ffcc80'  # orange
     value: '#a5d6a7'    # green
     command: '#90caf9'  # blue
+    function: '#90caf9'
+    declaration: '#e6ee9c'
+    assign: '#fff59d'
+    functionCall: '#90caf9'
+    control: '#ffab91'
+    type: '#90caf9'
+
     red: '#ef9a9a'
     pink: '#f48fb1'
     purple: '#ce93d8'
@@ -86,13 +107,6 @@ DEFAULT_OPTIONS =
     brown: '#bcaaa4'
     grey: '#eeeeee'
     bluegrey: '#b0bec5'
-    function: '#90caf9'
-    declaration: '#e6ee9c'
-    value: '#a5d6a7'
-    logic: '#ffab91'
-    assign: '#fff59d'
-    functionCall: '#90caf9'
-    control: '#ffab91'
 
 YES = -> yes
 NO = -> no
@@ -1438,27 +1452,21 @@ exports.View = class View
       if @model.buttons? then for {key, glyph} in @model.buttons
         @buttonGroups[key] = @view.draw.group()
         @buttonPaths[key] = @view.draw.path([
-          new @view.draw.Point 0, 0
-          new @view.draw.Point @view.opts.buttonWidth, 0
-          new @view.draw.Point @view.opts.buttonWidth, @view.opts.buttonHeight
-          new @view.draw.Point 0, @view.opts.buttonHeight
+            new @view.draw.Point 0, @view.opts.bevelClip
+            new @view.draw.Point @view.opts.bevelClip, 0
+
+            new @view.draw.Point @view.opts.buttonWidth - @view.opts.bevelClip, 0
+            new @view.draw.Point @view.opts.buttonWidth, @view.opts.bevelClip
+
+            new @view.draw.Point @view.opts.buttonWidth, @view.opts.buttonHeight - @view.opts.bevelClip
+            new @view.draw.Point @view.opts.buttonWidth - @view.opts.bevelClip, @view.opts.buttonHeight
+
+            new @view.draw.Point @view.opts.bevelClip, @view.opts.buttonHeight
+            new @view.draw.Point 0, @view.opts.buttonHeight - @view.opts.bevelClip
         ], false, {
           fillColor: 'none'
           cssClass: 'droplet-button-path'
         })
-        ###
-          new @view.draw.Point 0, @view.opts.bevelClip
-          new @view.draw.Point @view.opts.bevelClip, 0
-
-          new @view.draw.Point @view.opts.buttonWidth - @view.opts.bevelClip, 0
-          new @view.draw.Point @view.opts.buttonWidth, @view.opts.bevelClip
-
-          new @view.draw.Point @view.opts.buttonWidth, @view.opts.buttonHeight - @view.opts.bevelClip
-          new @view.draw.Point @view.opts.buttonWidth - @view.opts.bevelClip, @view.opts.buttonHeight
-
-          new @view.draw.Point @view.opts.bevelClip, @view.opts.buttonHeight
-          new @view.draw.Point 0, @view.opts.buttonHeight - @view.opts.bevelClip
-        ###
 
         @buttonGroups[key].style = {}
 
@@ -1942,7 +1950,7 @@ exports.View = class View
             # If it is a G-Shape
             if @lineChildren[lastLine].length > 1
               height = multilineBounds.bottom() - lastRect.y
-              top = lastRect.y + height / 2 - @view.opts.buttonHeight/2
+              top = lastRect.y + height / 2 - @view.opts.buttonHeight / 2
             else
               height = lastRect.bottom() - multilineBounds.bottom()
               top = multilineBounds.bottom() + height/2 - @view.opts.buttonHeight/2

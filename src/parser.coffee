@@ -406,6 +406,7 @@ exports.Parser = class Parser
         if line.length is 0 and not placedSomething and stack[stack.length - 1]?.type in ['indent', 'document', undefined] and
             hasSomeTextAfter(lines, i)
           block = new model.Block @opts.emptyLineColor, helper.BLOCK_ONLY, '__comment__'
+          # block.shape = helper.ANY_DROP <-- added by Mohammad. But is this needed???
 
           head = helper.connect head, block.start
           head = helper.connect head, block.end

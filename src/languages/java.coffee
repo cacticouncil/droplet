@@ -268,24 +268,23 @@ COLOR_RULES = {
   'importDeclaration': 'import',
 
   # Object-types and methods
-  'typeDeclaration': 'type',
-  'classBodyDeclaration': 'class',
-  'methodDeclaration': 'class',
+  'typeDeclaration': 'class',
+  'classBodyDeclaration': 'class_body',
+  'methodDeclaration': 'class_body',
   'fieldDeclaration': 'class',
   'blockStatement': 'statement',
 #  'localVariableDeclarationStatement': 'statement',
 
-  'forControl': 'control_special',
-  'enhancedForControl': 'control_special',
+  'forControl': 'loop_logic',
+  'enhancedForControl': 'loop_logic',
 
   # Variables
   
   'variableDeclarator': 'statement',
-  'formalParameter': 'statement',
   'statementExpression': 'statement',
-  'expression': 'value',
-  'parExpression': 'value',
-  'primary': 'value',
+  'expression': 'arithmetic',
+  'parExpression': 'logic',
+  'primary': 'arithmetic',
   'statement': 'statement',
 }
 
@@ -784,11 +783,11 @@ SHAPE_CALLBACK = { }
 
 # Default colors for various token types
 COLOR_DEFAULTS = {
-  'type': 'purple',
-  'import': 'grey',
-  'class': 'blue',
-  'value': 'teal',
-  'control_special': 'deeporange',
+#  'type': 'purple',
+#  'import': 'grey',
+#  'class': 'blue',
+#  'value': 'teal',
+#  'control_special': 'deeporange',
 
   'statement': (model) ->
     text = helper.trimIdentifierToken model.nodeContext?.prefix

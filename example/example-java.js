@@ -59,7 +59,7 @@ java =
         },
         {
           'id': 'static_method',
-          'block': 'public static int methodName(int param1)\n{\n    \n}',
+          'block': 'public static int methodName(int param1)\n{\n    return x;\n}',
           'context': 'classBodyDeclaration'
         },
         {
