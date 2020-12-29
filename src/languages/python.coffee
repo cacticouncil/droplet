@@ -170,23 +170,40 @@ config = {
   COLOR_CALLBACK: getColor
   BUTTON_CALLBACK: insertButton
 
+  COLOR_DEFAULTS: {}
   COLOR_RULES: {
-    'term': 'value',
-    'funcdef': 'control',
+    'import_name': 'import',
+    'import_from': 'import',
+    'term': 'term',
+    'funcdef': 'class_body',
     'for_stmt': 'control',
     'while_stmt': 'control',
     'with_stmt': 'control',
     'if_stmt': 'control',
     'try_stmt': 'control',
-    'import_stmt': 'command',
-    'print_stmt': 'command',
-    'expr_stmt': 'command',
-    'pass_stmt': 'command',
-    'return_stmt': 'return',
+    'import_stmt': 'import',
+    'print_stmt': 'statement',
+    'expr_stmt': 'statement',
+    'pass_stmt': 'statement',
+    'return_stmt': 'statement',
     'testlist': 'value',
-    'comparison': 'value',
+    'comparison': 'logic',
     'test': 'value',
-    'expr': 'value'
+    'expr': 'value',
+    'power': 'arithmetic',
+    'return': 'statement',
+    'class':'class'
+    'atom': 'arguments'
+    'classdef': 'class',
+    'arith_expr': 'arithmetic',
+    'term': 'arithmetic',
+    'and_expr':'bitwise',
+    'xor_expr': 'bitwise',
+    'shift_expr': 'bitwise',
+    'and_test': 'bitwise',
+    'or_test': 'bitwise',
+    'not_test': 'bitwise',
+    'comment':'comment'
   }
 
   SHAPE_RULES: [],
@@ -214,8 +231,6 @@ config.handleButton = (str, type, block) ->
   if blockType is 'if_stmt'
     node = parse({}, str).children[0]
     elif = checkElif(node)
-
-    console.log node
 
     if type is 'add-button'
       if elif is 'if' or elif is 'elif'
