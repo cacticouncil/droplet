@@ -33,6 +33,37 @@ BUTTON_GLYPH_COLOR = 'rgba(0, 0, 0, 0.3)'
 BUTTON_GLYPH_INVERT_COLOR = 'rgba(255, 255, 255, 0.5)'
 SVG_STANDARD = helper.SVG_STANDARD
 
+BUILTIN_COLORS =
+    brightred: '#ff0000'
+    lightred: '#ff9999'
+    pink: '#ff88aa' #'#f48fb1'
+    softpurple: '#cc99dd' #'#ce93d8'
+    deeppurple: '#bb99dd' #'#b39ddb'
+    lightindigo: '#99aadd'   #'#9fa8da'
+    babyblue: '#99ccff' #'#90caf9'
+    lightblue: '#88ccff' #'#81d4fa'
+    blue: '#3333ff'
+    brightblue: '#0000ff'
+    darkblue: '#000066'
+    cyan: '#88ddee' #'#80deea'
+    teal: '#88cccc' #'#80cbc4'
+    softgreen: '#aaddaa' #'#a5d6a7'
+    lightgreen: '#ccddcc' #'#c5e1a5'
+    green: '#009900'
+    darkgreen: '#006600' #'#008000'
+    yellow: '#ffff99' #'#fff59d'
+    orange: '#ffcc88' #'#ffcc80'
+    deeporange: '#ffaa99' #'#ffab91'
+    amber: '#ffdd88' #'#ffe082'
+    brown: '#bbaaaa' #'#bcaaa4'
+    lightgray: '#cccccc'
+    gray: '#aaaaaa'
+    darkgray: '#777777'
+    lightblack: '#333333'
+    offwhite: '#eeeeee'
+    bluegray: '#bbbbcc' #'#b0bec5'
+
+
 DEFAULT_OPTIONS =
   buttonWidth: 15
   lockedSocketButtonWidth: 15
@@ -59,54 +90,54 @@ DEFAULT_OPTIONS =
   highlightAreaHeight: 10
   bevelClip: 3
   shadowBlur: 5
+
   colors:
+    # unified folow scheme based on block type; will require further edits, but it is a start.
+    'import': BUILTIN_COLORS.gray
+    'class_body': BUILTIN_COLORS.babyblue
+    'class': BUILTIN_COLORS.softpurple
+    'loop_logic': BUILTIN_COLORS.deeporange
+    'comment': BUILTIN_COLORS.lightgray
+    'logic': BUILTIN_COLORS.teal
+    'arithmetic': BUILTIN_COLORS.teal
+    #'statement': '#ffe082'
+    #'sets': '#ffbf00'
+    'arguments': BUILTIN_COLORS.babyblue
+    'power': BUILTIN_COLORS.brightred
+    'bitwise': BUILTIN_COLORS.teal
 
-  # colors from javascript, python and java coming under the same hood!
-    'import': '#a0a0a0'     # gray
-    'class_body': '#90caf9' # blue
-    'class': '#ce93d8'      # purple
-    'loop_logic': '#80cbc4' # teal
-    'comment': '#c0c0c0'    # light gray
-    'logic': '#80deea'      # cyan
-    'arithmetic': '#81c0ff'
-    'statement': '#ffe082'
-    'sets': '#ffbf00'
-    'arguments': '#90caf9'  # same as class body
-    'power': '#ff0000'
-    'bitwise':'#a5d6a7'     # for bitwise operators
+    error: BUILTIN_COLORS.brightred
+    return: BUILTIN_COLORS.yellow
+    control: BUILTIN_COLORS.orange
+    value: BUILTIN_COLORS.softgreen
+    command: BUILTIN_COLORS.babyblue
+    function: BUILTIN_COLORS.babyblue
+    declaration: BUILTIN_COLORS.yellow
+    assign: BUILTIN_COLORS.yellow
+    functionCall: BUILTIN_COLORS.babyblue
+    type: BUILTIN_COLORS.babyblue
 
-    error: '#ff0000'
-    return: '#fff59d'   # yellow
-    control: '#ffcc80'  # orange
-    value: '#a5d6a7'    # green
-    command: '#90caf9'  # blue
-    function: '#90caf9'
-    declaration: '#e6ee9c'
-    assign: '#fff59d'
-    functionCall: '#90caf9'
-    control: '#ffab91'
-    type: '#90caf9'
-
-    red: '#ef9a9a'
-    pink: '#f48fb1'
-    purple: '#ce93d8'
-    deeppurple: '#b39ddb'
-    indigo: '#9fa8da'
-    blue: '#90caf9'
-    lightblue: '#81d4fa'
-    cyan: '#80deea'
-    teal: '#80cbc4'
-    green: '#a5d6a7'
-    lightgreen: '#c5e1a5'
-    darkgreen: '#008000'
-    lime: '#e6ee9c'
-    yellow: '#fff59d'
-    amber: '#ffe082'
-    orange: '#ffcc80'
-    deeporange: '#ffab91'
-    brown: '#bcaaa4'
-    grey: '#eeeeee'
-    bluegrey: '#b0bec5'
+    # Old colors mapped to new colors (deprecated)
+    red: BUILTIN_COLORS.lightred
+    pink: BUILTIN_COLORS.pink
+    purple: BUILTIN_COLORS.softpurple
+    deeppurple: BUILTIN_COLORS.deeppurple
+    indigo: BUILTIN_COLORS.lightindigo
+    blue: BUILTIN_COLORS.babyblue
+    lightblue: BUILTIN_COLORS.lightblue
+    cyan: BUILTIN_COLORS.cyan
+    teal: BUILTIN_COLORS.teal
+    green: BUILTIN_COLORS.softgreen
+    lightgreen: BUILTIN_COLORS.lightgreen
+    darkgreen: BUILTIN_COLORS.darkgreen
+    lime: BUILTIN_COLORS.lightgreen #'#e6ee9c'
+    yellow: BUILTIN_COLORS.yellow
+    amber: BUILTIN_COLORS.amber
+    orange: BUILTIN_COLORS.orange
+    deeporange: BUILTIN_COLORS.deeporange
+    brown: BUILTIN_COLORS.brown
+    grey: BUILTIN_COLORS.offwhite
+    bluegrey: BUILTIN_COLORS.bluegray
 
 YES = -> yes
 NO = -> no
