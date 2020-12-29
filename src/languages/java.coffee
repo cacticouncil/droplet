@@ -144,6 +144,7 @@ RULES = {
 
   # Type wrappers
   'classDeclaration': 'skip',
+  'constructorDeclaration': 'skip',
   'memberDeclaration': 'skip',
   'methodDeclaration': 'skip',
   'fieldDeclaration': 'skip',

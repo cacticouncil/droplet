@@ -1,10 +1,5 @@
 {
   "mode": "java",
-  "modeOptions":
-  {
-    "functions": { }
-  },
-
   "palette":
   [
     {
@@ -23,7 +18,7 @@
         },
         {
           "id": "class_and_main",
-          "block": "public class Main\n{\n    public static void main(String[] args)\n    {\n        \n    }\n}",
+          "block": "public class Main\n{\n    public static void main(String[] args)\n    {\n        //Entry point\n    }\n}",
           "context": "typeDeclaration"
         },
         {
@@ -54,17 +49,17 @@
       [
         {
           "id": "class_declaration",
-          "block": "public class ClassName\n{\n    \n}",
+          "block": "public class ClassName\n{\n    public ClassName(int param)\n    {\n        //Constructor\n    }\n}",
           "context": "typeDeclaration"
         },
         {
           "id": "static_method",
-          "block": "public static int methodName(int param1)\n{\n    \n}",
+          "block": "public static int methodName(int param1)\n{\n    return 0;\n}",
           "context": "classBodyDeclaration"
         },
         {
           "id": "instance_method",
-          "block": "public int methodName(int param1)\n{\n    \n}",
+          "block": "public int methodName(int param1)\n{\n    return 0;\n}",
           "context": "classBodyDeclaration"
         },
         {
@@ -76,6 +71,11 @@
           "id": "instance_variable",
           "block": "public int i = 0;",
           "context": "classBodyDeclaration"
+        },
+        {
+          "id": "object_allocation",
+          "block": "ClassName obj = new ClassName(param);",
+          "context": "blockStatement"
         },
         {
           "id": "method_invocation",
